@@ -16,7 +16,7 @@
         "clean-tests": "jest --clearCache"
     },
     "dependencies": {
-        "@hivechain/dhive": "^0.13.3",
+        "@hiveio/dhive": "^0.14.0",
         "bignumber.js": "^9.0.0",
         "cors": "^2.8.5",
         "dotenv": "^8.2.0",
