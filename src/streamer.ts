@@ -25,6 +25,7 @@ export class Streamer {
     private customJsonSubscriptions: any[] = [];
     private customJsonIdSubscriptions: any[] = [];
     private customJsonHiveEngineSubscriptions: any[] = [];
+    private createClaimedAccountSubscriptions: any[] = [];
     private commentSubscriptions: any[] = [];
     private postSubscriptions: any[] = [];
     private transferSubscriptions: any[] = [];
@@ -511,6 +512,12 @@ export class Streamer {
                 }
             });
         }
+
+        if (op[0] === 'create_claimed_account') {
+            this.createClaimedAccountSubscriptions.forEach(sub => {
+                sub.callback(op[1], blockNumber, blockId, prevBlockId, trxId, blockTime);
+            });
+        }
     }
 
     private processActions() {
@@ -758,6 +765,10 @@ export class Streamer {
 
     public onCustomJsonId(callback: any, id: string): void {
         this.customJsonIdSubscriptions.push({ callback, id });
+    }
+
+    public onCreateClaimedAccount(callback: any): void {
+        this.createClaimedAccountSubscriptions.push({ callback });
     }
 
     public onHiveEngine(callback: any): void {
